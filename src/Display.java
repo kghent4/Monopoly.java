@@ -1,19 +1,48 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Display extends JFrame {
 
     Property[][] properties = new Property[11][11];
-    Button communityChest = new Button("Community Chest");
+    JButton communityChest = new JButton("Community Chest");
+    JButton chance = new JButton("Chance");
+
 
     public Display() {
+        setLayout(null);
         setTitle("Monopoly Game");
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+
+        communityChest.setBackground(new Color(0, 100, 200));
+        communityChest.setBounds(200, 200, 100, 50);
+        add(communityChest);
+
+        chance.setBackground(new Color(0, 100, 200));
+        chance.setBounds(200, 300, 100, 50);
+        add(chance);
+
+        communityChest.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(Display.this, "Button Clicked!");
+            }
+        });
+
+        chance.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(Display.this, "Button Clicked!");
+            }
+        });
     }
 
     public void drawBoard(Graphics2D g2d){
+        g2d.setColor(new Color(240, 230, 200));
+        g2d.fillRect(50, 50, 75*11, 75*11);
         g2d.setColor(Color.BLACK);
         for(int i = 0; i < properties.length; i++){
             for(int j = 0; j < properties[i].length; j++){
@@ -27,30 +56,6 @@ public class Display extends JFrame {
                 }
             }
         }
-        drawCardPile(g2d);
-    }
-
-    private void drawCardPile(Graphics2D g2d) {
-        
-        communityChest.setBackground(new Color(0, 100, 200));
-        communityChest.setBounds(200, 200, 100, 15);
-        add(communityChest);
-        
-        
-       
-        // Draw card text
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 12));
-        FontMetrics fm = g2d.getFontMetrics();
-        g2d.setColor(new Color(255, 255, 255));
-        g2d.drawString("Community Chest", 200, 230);
-
-        // Draw card background
-        g2d.setColor(new Color(0, 50, 200));
-        g2d.fillRoundRect(200, 300, 100, 50, 15, 15);
-
-        // Draw card text
-        g2d.setColor(new Color(255, 255, 255));
-        g2d.drawString("Chance", 230, 330);
     }
 
     private void drawProperty(Property p, Graphics2D g2d, int x, int y) {
@@ -71,12 +76,7 @@ public class Display extends JFrame {
         Graphics2D g2d = (Graphics2D) g;
         
         // Draw the board background TODO
-        g2d.setColor(new Color(240, 230, 200));
-        int boardSize = 721;
-        int cellSize = boardSize / 11;
-        int startX = (getWidth() - boardSize) / 2;
-        int startY = (getHeight() - boardSize) / 2;
-        g2d.fillRect(50, 50, 75*11, 75*11);
+        
 
         drawBoard(g2d);
     }
