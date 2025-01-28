@@ -10,6 +10,7 @@ public class Display extends JFrame {
     static ArrayList<Player> players = new ArrayList<Player>(1);
     static JButton communityChest = new JButton("Community Chest");
     static JButton chance = new JButton("Chance");
+    static JLabel diceDisplay = new JLabel();
     static JFrame frame = new JFrame("Monopoly Game");
     static JPanel boardPanel = new JPanel() {
     
@@ -83,7 +84,7 @@ public class Display extends JFrame {
                     g2d.drawString("$" + player.getMoney(), 150 + playerOffset, 300 + 18);
 
 
-                    if(!player.getProperties().isEmpty()){
+                    if(player.getProperties() != null && !player.getProperties().isEmpty()){
                         for(Property property : player.getProperties()){
                             g2d.setColor(property.getColor());
                             g2d.fillRect(150 + playerOffset, 300 + propertyOffset, 75, 75 / 4);
@@ -117,6 +118,12 @@ public class Display extends JFrame {
         chance.setBackground(new Color(0, 100, 200));
         chance.setBounds(400, 200, 150, 50);
         frame.add(chance);
+
+        //Config dice display
+        diceDisplay.setBounds(600, 200, 100, 100);
+        diceDisplay.setBackground(new Color(255, 255, 255));
+        diceDisplay.setText("No rolls yet!");
+        frame.add(diceDisplay);
 
         communityChest.addActionListener(new ActionListener() {
             @Override
