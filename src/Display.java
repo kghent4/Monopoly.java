@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Display extends JFrame {
 
     static Property[][] properties = new Property[11][11];
-    static ArrayList<Player> players = new ArrayList<Player>(1);
+    static ArrayList<Player> players = new ArrayList<>(1);
     static JButton communityChest = new JButton("Community Chest");
     static JButton chance = new JButton("Chance");
     static JLabel diceDisplay = new JLabel();
@@ -160,7 +160,7 @@ public class Display extends JFrame {
                                             options[0]);
     }
 
-    public static void setDiceDisplay(Player p, int number){
-        diceDisplay.setText(p.getName() + " rolled a " + number + "!");
+    public static void setDiceDisplay(String text){
+        diceDisplay.setText(text);
     }
 }

@@ -20,8 +20,8 @@ Display.java methods that you will use:
     - Give it the title for the popup, the question, and an Array of String options to choose from
     - Returns the index of the option that is chosen from the options Array
 
-    public static void setDiceDisplay(Player p, int number)
-    - Call this method to update the display when the dice are rolled! Tell it who rolled and what they rolled.
+    public static void setDiceDisplay(String text)
+    - Call this method to update the display when the dice are rolled!
 
 
 *******************************************************************
