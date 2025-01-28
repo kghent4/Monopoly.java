@@ -12,14 +12,13 @@ Display.java instance variables that you will use:
 
 Display.java methods that you will use:
 
-    public static void landOnUnownedProperty(Property p)
-    - Call this method if the property landed on can be bought!
+    public static void inform(String text)
+    - Give it the text that you want to display to the user 
 
-    public static void landOnOwnedProperty(Property p)
-    - Call this method if the property landed on is owned by someone!
-
-    public static void landOnSpecialProperty(Property p, String text)
-    - Call this method if the property landed on is a special property! Give it the text that you want to display.
+    public static int choice(String title, String text, String[] options)
+    - Allow the user to make a choice.
+    - Give it the title for the popup, the question, and an Array of String options to choose from
+    - Returns the index of the option that is chosen from the options Array
 
     public static void setDiceDisplay(Player p, int number)
     - Call this method to update the display when the dice are rolled! Tell it who rolled and what they rolled.

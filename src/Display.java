@@ -75,7 +75,7 @@ public class Display extends JFrame {
             int playerOffset = 0;
             int propertyOffset = 25;
 
-            if(!players.isEmpty()){
+            if(players != null && !players.isEmpty()){
                 for(Player player: players){
                     
                     propertyOffset = 25;
@@ -145,16 +145,19 @@ public class Display extends JFrame {
         frame.setVisible(true);
     }
 
-    public static void landOnUnownedProperty(Property p){
-        JOptionPane.showMessageDialog(frame, "You can buy this property!");
-    }
-
-    public static void landOnOwnedProperty(Property p){
-        JOptionPane.showMessageDialog(frame, "You owe " + p.getOwner() + " $" + p.getRent() + " in rent.");
-    }
-
-    public static void landOnSpecialProperty(Property p, String text){
+    public static void inform(String text){
         JOptionPane.showMessageDialog(frame, text);
+    }
+
+    public static int choice(String title, String text, String[] options){
+        return JOptionPane.showOptionDialog(frame,
+                                            text,
+                                            title,
+                                            JOptionPane.YES_NO_OPTION,
+                                            JOptionPane.QUESTION_MESSAGE,
+                                            null,
+                                            options,
+                                            options[0]);
     }
 
     public static void setDiceDisplay(Player p, int number){
