@@ -21,6 +21,8 @@ Display.java methods that you will use:
     public static void landOnSpecialProperty(Property p, String text)
     - Call this method if the property landed on is a special property! Give it the text that you want to display.
 
+    public static void setDiceDisplay(Player p, int number)
+    - Call this method to update the display when the dice are rolled! Tell it who rolled and what they rolled.
 
 
 *******************************************************************

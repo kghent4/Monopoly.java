@@ -120,7 +120,7 @@ public class Display extends JFrame {
         frame.add(chance);
 
         //Config dice display
-        diceDisplay.setBounds(600, 200, 100, 100);
+        diceDisplay.setBounds(600, 160, 100, 100);
         diceDisplay.setBackground(new Color(255, 255, 255));
         diceDisplay.setText("No rolls yet!");
         frame.add(diceDisplay);
@@ -155,5 +155,9 @@ public class Display extends JFrame {
 
     public static void landOnSpecialProperty(Property p, String text){
         JOptionPane.showMessageDialog(frame, text);
+    }
+
+    public static void setDiceDisplay(Player p, int number){
+        diceDisplay.setText(p.getName() + " rolled a " + number + "!");
     }
 }
