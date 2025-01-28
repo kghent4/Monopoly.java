@@ -46,6 +46,52 @@ public class Display extends JFrame {
 
             //Draw player assets
             drawPlayerAssets(g2d);
+            drawPlayers(g2d);
+        }
+
+        public void drawPlayers(Graphics g2d){
+            
+            if(players != null && !players.isEmpty()){
+                int playerOffset = 1;
+                for(Player p:players){
+                    int xoffset = 0;
+                    int yoffset = 0;
+
+                    //top row
+                    if(p.getLocation() < 11){
+                        xoffset = p.getLocation() * 75;
+                    }
+
+                    //bottom row
+                    else if(p.getLocation() > 19 && p.getLocation() < 31){
+                        xoffset = (30 - p.getLocation()) * 75;
+                        yoffset = 750;
+                    }
+
+                    //right side
+                    else if(p.getLocation() > 10 && p.getLocation() < 20){
+                        yoffset = (p.getLocation()-10) * 75;
+                        xoffset = 750;
+                    }
+
+                    else if(p.getLocation() > 30 && p.getLocation() < 40){
+
+                        yoffset = (40 - p.getLocation()) * 75;
+                        xoffset = 0;
+                    }
+
+                    else{
+                        System.out.println("Invalid player location.");
+                    }
+
+                    g2d.setColor(new Color(255, 0, 255));
+                    g2d.fillOval(xoffset + playerOffset * 18 - 15, yoffset + 30, 15, 15);
+                    g2d.setColor(new Color(255, 255, 255));
+                    g2d.drawString(Integer.toString(playerOffset), xoffset + playerOffset * 18 - 10, yoffset + 43);
+
+                    playerOffset += 1;
+                }
+            }
         }
 
         private void drawProperty(Property p, Graphics2D g2d, int x, int y) {
@@ -77,7 +123,6 @@ public class Display extends JFrame {
 
             if(players != null && !players.isEmpty()){
                 for(Player player: players){
-                    
                     propertyOffset = 25;
                     g2d.setColor(Color.BLACK);
                     g2d.drawString(player.getName(), 150 + playerOffset, 300);
@@ -96,8 +141,10 @@ public class Display extends JFrame {
                             propertyOffset += 20;
                         }
 
-                        playerOffset += 150;
+                       
                     }
+
+                    playerOffset += 150;
                 }
             }
         }
