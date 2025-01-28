@@ -9,6 +9,7 @@ public class Display extends JFrame {
     static JButton communityChest = new JButton("Community Chest");
     static JButton chance = new JButton("Chance");
     static JPanel boardPanel = new JPanel() {
+    
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -23,16 +24,25 @@ public class Display extends JFrame {
             for (int i = 0; i < properties.length; i++) {
                 for (int j = 0; j < properties[i].length; j++) {
                     if (i == 0 || i == 10 || j == 0 || j == 10) {
+                        g2d.setColor(Color.BLACK);
                         g2d.drawRect(i * 75, j * 75, 75, 75);
-                        if (properties[i][j] != null) {
+                       /*  if (properties[i][j] == null) {
+                            properties[i][j] = new Property();
+                            
+                        }
+                        drawProperty(properties[i][j], g2d, i, j);
+                        for testing*/
+                         if (properties[i][j] != null) {
                             drawProperty(properties[i][j], g2d, i, j);
                         }
+                         
                     }
                 }
             }
         }
 
         private void drawProperty(Property p, Graphics2D g2d, int x, int y) {
+
             // Draw color bar
             g2d.setColor(p.getColor());
             g2d.fillRect(x * 75, y * 75, 75, 75 / 4);
@@ -40,8 +50,15 @@ public class Display extends JFrame {
             // Draw property name
             g2d.setColor(Color.BLACK);
             g2d.setFont(new Font("SansSerif", Font.PLAIN, 10));
-            FontMetrics fm = g2d.getFontMetrics();
             g2d.drawString(p.getName(), x * 75 + 5, y * 75 + 65);
+
+            //Draw houses
+            g2d.setColor(new Color(50, 168, 82));
+            int offset = 0;
+            for(int i = 0; i < p.getNumHouses(); i++){
+                g2d.fillOval(x * 75 + offset, y*75, 10, 10);
+                offset += 10;
+            }
         }
     };
 

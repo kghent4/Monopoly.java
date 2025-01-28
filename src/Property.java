@@ -12,4 +12,9 @@ public class Property {
     public String getName(){
         return "nothing";
     }
+
+    //TODO fix
+    public int getNumHouses(){
+        return 5;
+    }
 }
