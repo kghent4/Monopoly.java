@@ -1,13 +1,14 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class Display extends JFrame {
 
     static Property[][] properties = new Property[11][11];
     static JButton communityChest = new JButton("Community Chest");
     static JButton chance = new JButton("Chance");
+    static JFrame frame = new JFrame("Monopoly Game");
     static JPanel boardPanel = new JPanel() {
     
         @Override
@@ -63,7 +64,7 @@ public class Display extends JFrame {
     };
 
     public static void setupFrame() {
-        JFrame frame = new JFrame("Monopoly Game");
+        
         frame.setSize(1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -99,4 +100,15 @@ public class Display extends JFrame {
         frame.setVisible(true);
     }
 
+    public static void landOnUnownedProperty(Property p){
+        JOptionPane.showMessageDialog(frame, "You can buy this property!");
+    }
+
+    public static void landOnOwnedProperty(Property p){
+        JOptionPane.showMessageDialog(frame, "You owe " + p.getOwner() + " $" + p.getRent() + " in rent.");
+    }
+
+    public static void landOnSpecialProperty(Property p, String text){
+        JOptionPane.showMessageDialog(frame, text);
+    }
 }

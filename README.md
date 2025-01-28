@@ -3,9 +3,26 @@ Display.java instance variables that you will use:
     static Property[][] properties = new Property[11][11];
     - You need to fill this with the properties that you create!
 
+
+*******************************************************************
+
+
 Display.java methods that you will use:
 
-    None yet!
+    public static void landOnUnownedProperty(Property p)
+    - Call this method if the property landed on can be bought!
+
+    public static void landOnOwnedProperty(Property p)
+    - Call this method if the property landed on is owned by someone!
+
+    public static void landOnSpecialProperty(Property p, String text)
+    - Call this method if the property landed on is a special property! Give it the text that you want to display.
+
+
+
+*******************************************************************
+
+
 
 Important Modifications
 
@@ -15,6 +32,12 @@ Important Modifications
         2 houses - triple rent
         etc.
         All properties in a set owned - double rent (after calculating house multiplier)
+
+
+
+*******************************************************************
+
+
 
 Properties (in order)          Cost to buy          Base Rent           Color               Cost to buy a house
     Go                              --                  --                  --                  --

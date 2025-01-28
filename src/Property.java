@@ -17,4 +17,14 @@ public class Property {
     public int getNumHouses(){
         return 5;
     }
+
+    //TODO fix
+    public String getOwner(){
+        return "no one";
+    }
+
+    //TODO fix
+    public int getRent(){
+        return 20;
+    }
 }
