@@ -3,6 +3,9 @@ Display.java instance variables that you will use:
     static Property[][] properties = new Property[11][11];
     - You need to fill this with the properties that you create!
 
+    static ArrayList<Player> players = new ArrayList<Player>(1);
+    - You need to fill this with the players that you create!
+
 
 *******************************************************************
 

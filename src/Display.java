@@ -1,11 +1,13 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Display extends JFrame {
 
     static Property[][] properties = new Property[11][11];
+    static ArrayList<Player> players = new ArrayList<Player>(1);
     static JButton communityChest = new JButton("Community Chest");
     static JButton chance = new JButton("Chance");
     static JFrame frame = new JFrame("Monopoly Game");
@@ -40,6 +42,9 @@ public class Display extends JFrame {
                     }
                 }
             }
+
+            //Draw player assets
+            drawPlayerAssets(g2d);
         }
 
         private void drawProperty(Property p, Graphics2D g2d, int x, int y) {
@@ -61,10 +66,44 @@ public class Display extends JFrame {
                 offset += 10;
             }
         }
+
+        private void drawPlayerAssets(Graphics2D g2d) {
+
+           // System.out.println(players.size());
+            
+            int playerOffset = 0;
+            int propertyOffset = 25;
+
+            if(!players.isEmpty()){
+                for(Player player: players){
+                    
+                    propertyOffset = 25;
+                    g2d.setColor(Color.BLACK);
+                    g2d.drawString(player.getName(), 150 + playerOffset, 300);
+                    g2d.drawString("$" + player.getMoney(), 150 + playerOffset, 300 + 18);
+
+
+                    if(!player.getProperties().isEmpty()){
+                        for(Property property : player.getProperties()){
+                            g2d.setColor(property.getColor());
+                            g2d.fillRect(150 + playerOffset, 300 + propertyOffset, 75, 75 / 4);
+
+                            // Draw property name
+                            g2d.setColor(Color.BLACK);
+                            g2d.drawString(property.getName(), 150 + playerOffset, 300 + propertyOffset + 15);
+
+                            propertyOffset += 20;
+                        }
+
+                        playerOffset += 150;
+                    }
+                }
+            }
+        }
     };
 
     public static void setupFrame() {
-        
+
         frame.setSize(1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -76,7 +115,7 @@ public class Display extends JFrame {
         frame.add(communityChest);
 
         chance.setBackground(new Color(0, 100, 200));
-        chance.setBounds(200, 300, 150, 50);
+        chance.setBounds(400, 200, 150, 50);
         frame.add(chance);
 
         communityChest.addActionListener(new ActionListener() {
@@ -96,7 +135,6 @@ public class Display extends JFrame {
         // Add the custom board
         boardPanel.setBounds(50, 50, 900, 900);
         frame.add(boardPanel);
-
         frame.setVisible(true);
     }
 
