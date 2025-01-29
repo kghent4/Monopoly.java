@@ -99,11 +99,33 @@ public class Display extends JFrame {
             // Draw color bar
             g2d.setColor(p.getColor());
             g2d.fillRect(x * 75, y * 75, 75, 75 / 4);
+            g2d.setColor(Color.BLACK);
+            g2d.drawRect(x * 75, y * 75, 75, 75 / 4);
 
             // Draw property name
+            int nameOffset = y * 75 + 65;
             g2d.setColor(Color.BLACK);
             g2d.setFont(new Font("SansSerif", Font.PLAIN, 10));
-            g2d.drawString(p.getName(), x * 75 + 5, y * 75 + 65);
+            if(p.getName().length() > 12){
+                String[] names = p.getName().split(" ");
+                if(names.length == 3){
+                    nameOffset -= 10;
+                    g2d.drawString(names[0] + names[1], x * 75 + 5, nameOffset);
+                    nameOffset += 10;
+                    g2d.drawString(names[2], x * 75 + 5, nameOffset);
+                }
+                else{
+                    nameOffset -= 10;
+                    g2d.drawString(names[0], x * 75 + 5, nameOffset);
+                    nameOffset += 10;
+                    g2d.drawString(names[1], x * 75 + 5, nameOffset);
+                }
+
+            }
+            else{
+                g2d.drawString(p.getName(), x * 75 + 5, nameOffset);
+            }
+            
 
             //Draw houses
             g2d.setColor(new Color(50, 168, 82));
