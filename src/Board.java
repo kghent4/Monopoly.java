@@ -6,6 +6,7 @@ public class Board {
     Property[][] properties = new Property[11][11];
 
     public Board(){
+
         Display.properties = properties;
         properties[0][0] = new Property(new Color(240, 230, 200), "Go", 0, 0, "neutral", 0, 0);
         properties[1][0] = new Property(new Color(102,51,0), "Mediterranean Avenue", 2, 50, "property", 2, 60);
@@ -52,4 +53,5 @@ public class Board {
         properties[0][1] = new Property(Color.BLUE, "Boardwalk", 50, 200, "property", 2, 400);
 
     }
+
 }
