@@ -51,7 +51,7 @@ public class Display extends JFrame {
         public void drawPlayers(Graphics g2d){
             
             g2d.setFont(new Font("SansSerif", Font.PLAIN, (squareLength/6)));
-
+            System.out.println("Draw Players");
             if(players != null && !players.isEmpty()){
                 int playerOffset = 1;
                 for(Player p:players){
