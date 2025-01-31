@@ -1,33 +1,33 @@
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 public class Player {
 
-    //TODO FIX
+    ArrayList<Property> propertiesOwned = new ArrayList<>();
+    String name;
+    int cash;
+    int location;
+
+    public Player(String name){
+        this.name = name;
+        cash = 2000;
+        location = 0;
+    }
+
     public String getName(){
-        return "no one";
+        return name;
     }
 
-    ///TODO FIX
     public int getMoney(){
-        return 1000;
+        return cash;
     }
 
-    //TODO FIX
     public ArrayList<Property> getProperties(){
-        ArrayList<Property> p = new ArrayList<>();
-        p.add(new Property(Color.BLACK, "oslo", 0, 0, "sdfd"));
-        p.add(new Property(Color.BLACK, "oslo", 0, 0, "sdfd"));
-        p.add(new Property(Color.BLACK, "oslo", 0, 0, "sdfd"));
-        p.add(new Property(Color.BLACK, "oslo", 0, 0, "sdfd"));
         
-        return p;
+        return propertiesOwned;
     }
 
-    //TODO FIX
-    //Go is the top left corner, location 0. Locations increase by 1 for each property that the player passes clockwise.
     public int getLocation(){
-        return 21;
+        return location;
     }
 }

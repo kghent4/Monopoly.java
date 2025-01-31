@@ -5,21 +5,24 @@ public class Property {
 
     Color color;
     String name;
-    String owner;
+    Player owner;
     int rent;
     int houseCost;
     String type;
+    int setSize;
 
     int numHouses;
 
-    public Property(Color c, String n, int r, int hc, String t){
+    public Property(Color c, String n, int r, int hc, String t, int s){
         color = c;
         name = n;
         rent = r;
         houseCost = hc;
         type = t;
         numHouses = 0;
-        owner = "none";
+        owner = null;
+        setSize = s;
+        houseCost = hc;
     }
 
     public Color getColor(){
@@ -34,11 +37,66 @@ public class Property {
         return numHouses;
     }
 
-    public String getOwner(){
+    public Player getOwner(){
         return owner;
     }
 
     public int getRent(){
+
+        int setCount = 0;
+        int multiplier = 1;
+
+        switch(type){
+            case "property":
+
+                if(numHouses != 0){
+                    multiplier *= numHouses;
+                }
+
+                if(owner != null){
+                    for(Property p: this.owner.propertiesOwned){
+                        if(p.color.equals(this.color)){
+                            setCount++;
+                        }
+                    }
+                    if(setCount == setSize){
+                        multiplier += 1;
+                    }
+                }
+
+                return rent * multiplier;
+
+            case "railroad":
+                if(owner != null){
+
+                    for(Property p: this.owner.propertiesOwned){
+                        if(p.color.equals(this.color)){
+                            setCount++;
+                        }
+                    }
+                    
+                    multiplier = setCount;
+                }
+
+                return rent * multiplier;
+                    
+            case "utility":
+                if(owner != null){
+
+                    for(Property p: this.owner.propertiesOwned){
+                        if(p.name.equals("Water Works") || p.name.equals("Electric Company") ){
+                            setCount++;
+                        }
+                    }
+                    
+                    multiplier = setCount;
+                }
+
+                return rent * multiplier;
+            default:
+                System.out.println("Something went wrong. Invalid property type when trying to calculate rent.");
+                
+        }
         return rent;
     }
 }
