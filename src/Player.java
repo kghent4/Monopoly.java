@@ -14,6 +14,26 @@ public class Player {
         location = 0;
     }
 
+    public void move(){
+        //todo
+    }
+
+    public void buy(){
+//todo
+    }
+
+    public void payRent(){
+//todo
+    }
+
+    public void specialAction(){
+//todo
+    }
+
+    public void buyAndSellHouses(){
+//todo
+    }
+
     public String getName(){
         return name;
     }

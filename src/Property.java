@@ -12,9 +12,11 @@ public class Property {
     int setSize;
 
     int numHouses;
+    int cost;
 
-    public Property(Color c, String n, int r, int hc, String t, int s){
+    public Property(Color c, String n, int r, int hc, String t, int s, int cost){
         color = c;
+        this.cost = cost;
         name = n;
         rent = r;
         houseCost = hc;
