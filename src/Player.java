@@ -16,22 +16,22 @@ public class Player {
         currentProperty = Board.propertiesMap.get(0);
     }
 
-    public void movePlayer(int roll, Player p){
+    public void movePlayer(int roll){
         System.out.println("in movePlayers");
-        int newLoc = p.location + roll;
+        int newLoc = location + roll;
 
         //todo account for back past go
         if(newLoc > 40){
             Display.inform("You passed go! Collect $200!");
-            p.cash += 200;
+            cash += 200;
             newLoc %= 40;
         }
 
-        p.location = newLoc;
+        location = newLoc;
         Display.boardPanel.repaint();
 
-        p.currentProperty = Board.propertiesMap.get(p.location);
-        p.landOnProperty();
+        currentProperty = Board.propertiesMap.get(location);
+        landOnProperty();
     }
 
     public void landOnProperty(){
@@ -75,41 +75,18 @@ public class Player {
     public void payRent(){
         Player landlord = currentProperty.owner;
         Display.inform("You owe " + landlord.getName() + " $" + currentProperty.rent + " in rent!");
-        if(cash - currentProperty.getRent() >= 0){
-            cash -= currentProperty.getRent();
-            landlord.cash += currentProperty.getRent();
-            Display.boardPanel.repaint();
-        }
-
-        else{
-            Display.inform("You are bankrupt!");
-            bankrupt(landlord);
-        }
+        payMoney(currentProperty.rent, currentProperty.owner);
     }
 
     public void specialAction(){
         switch(currentProperty.name){
             case "Income Tax":
                 Display.inform("You must pay the bank $200.");
-                if(cash >= 200){
-                    cash -= 200;
-                    Display.boardPanel.repaint();
-                }
-                else{
-                    Display.inform("You are bankrupt!");
-                    bankrupt(null);
-                }
+                payMoney(200, null);
                 break;
             case "Luxury Tax":
                 Display.inform("You must pay the bank $75.");
-                if(cash >= 75){
-                    cash -= 75;
-                    Display.boardPanel.repaint();
-                }
-                else{
-                    Display.inform("You are bankrupt!");
-                    bankrupt(null);
-                }
+                payMoney(75, null);
                 break;
             case "Go":
             case "Free Parking":
@@ -127,6 +104,10 @@ public class Player {
         }
     }
 
+    public void goToJail(){
+        //todo
+    }
+
     public void bankrupt(Player owed){
         //todo
     }
@@ -141,6 +122,19 @@ public class Player {
 
     public int getMoney(){
         return cash;
+    }
+
+    public void payMoney(int amount, Player owedTo){
+        if(cash < amount){
+            Display.inform("You are bankrupt!");
+            bankrupt(owedTo);
+            return;
+        }
+        if(owedTo != null){
+            owedTo.cash += amount;
+        }
+        cash -= amount;
+        Display.boardPanel.repaint();
     }
 
     public ArrayList<Property> getProperties(){

@@ -41,7 +41,7 @@ public class Monopoly {
 
             Display.inform(players.get(turn).getName() + " rolled " + article + " " + roll + ".");
 
-            players.get(turn).movePlayer(roll, players.get(turn));
+            players.get(turn).movePlayer(roll);
 
             turn = (turn + 1) % players.size();
         }

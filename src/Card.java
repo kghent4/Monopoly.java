@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.text.PlainDocument;
 
 public class Card {
     static ArrayList<Card> communityChest = new ArrayList<>();
@@ -17,7 +18,24 @@ public class Card {
     }
 
     public static void fillAndShuffleCommunityChest(){
-        
+        communityChest.add(new Card("Advance to Go. Collect $200.", "move", 0, 0));
+        communityChest.add(new Card("Bank error in your favor. Collect $200.", "money", 200, 0));
+        communityChest.add(new Card("Doctor’s fee. Pay $50", "money", -50, 0));
+        communityChest.add(new Card("From sale of stock you get $50", "money", 50, 0));
+        communityChest.add(new Card("Get Out of Jail Free.", "outOfJail", 0, 0));
+        communityChest.add(new Card("Go to Jail. Go directly to Jail, do not pass Go, do not collect $200.", "jail", 0, 0));
+        communityChest.add(new Card("Holiday fund matures. Receive $100", "money", 100, 0));
+        communityChest.add(new Card("Income tax refund. Collect $20.", "money", 20, 0));
+        communityChest.add(new Card("It is your birthday. Collect $10 from every player.", "allMoney", 10, 0));
+        communityChest.add(new Card("Life insurance matures. Collect $100", "money", 100, 0));
+        communityChest.add(new Card("Pay hospital fees of $100", "money", -100, 0));
+        communityChest.add(new Card("Pay school fees of $50", "money", -50, 0));
+        communityChest.add(new Card("Receive $25 consultancy fee", "money", 25, 0));
+        communityChest.add(new Card("Make general repairs on all your property. For each house pay $25. For each hotel pay $100.", "repairs", 0, 0));
+        communityChest.add(new Card("You have won second prize in a beauty contest. Collect $10", "money", 10, 0));
+        communityChest.add(new Card("You inherit $100", "money", 100, 0));
+
+        Collections.shuffle(chance);
     }
 
     public static void fillAndShuffleChance(){
@@ -30,15 +48,56 @@ public class Card {
         chance.add(new Card("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.", "utility", 0, 0));
         chance.add(new Card("Bank pays you dividend of $50.", "money", 50, 0));
         chance.add(new Card("Get Out of Jail Free.", "outOfJail", 0, 0));
-        chance.add(new Card("Go Back 3 Spaces.", "outOfJail", 0, 0)); 
+        chance.add(new Card("Go Back 3 Spaces.", "moveBack", 0, 0)); 
         chance.add(new Card("Go to Jail. Go directly to Jail, do not pass Go, do not collect $200.", "jail", 0, 0));
         chance.add(new Card("Make general repairs on all your property. For each house pay $25. For each hotel pay $100.", "repairs", 0, 0));
         chance.add(new Card("Speeding fine $15.", "money", -15, 0));
         chance.add(new Card("Take a trip to Reading Railroad. If you pass Go, collect $200.", "move", 0, 5));
         chance.add(new Card("You have been elected Chairman of the Board. Pay each player $50.", "allMoney", -50, 0));
+        chance.add(new Card("Your building loan matures. Collect $150", "money", 150, 0));
 
         Collections.shuffle(chance);
     }
 
+    public void takeCardAction(Player p){
+        switch(type) {
+            case "move":
+                if(specificSpace > p.location){
+                    p.movePlayer(specificSpace - p.location);
+                }
+                else if(specificSpace == p.location){
+                    p.movePlayer(40);
+                }
+                else{
+                    p.movePlayer(40-(p.location - specificSpace));
+                }
+                break;
+            case "money":
+                if(money > 0){
+                    p.cash += money;
+                }
+                else{
+                    p.payMoney(money, null);
+                }
+                break;
+            case "jail":
+                p.location = 10;
+                p.currentProperty = Board.propertiesMap.get(10);
+                p.goToJail();
+                break;
+            case "allMoney":
+                //todo
+            case "repairs":
+                //todo
+            case "outOfJail":
+            //todo
+            case "moveBack":
+            //todo
+            case "railroad":
+            //todo
+            case "utility":
+                break;
+        }
+    }
 
 }
