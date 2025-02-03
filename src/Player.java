@@ -33,7 +33,7 @@ public class Player {
                 specialAction();
         }
 
-        //if a current set is completed
+        //TODO if a current set is completed
         buyAndSellHouses();
     }
 
@@ -55,11 +55,25 @@ public class Player {
     }
 
     public void payRent(){
-//todo
+        Player landlord = currentProperty.owner;
+        Display.inform("You owe " + landlord.getName() + " $" + currentProperty.rent + " in rent!");
+        if(cash - currentProperty.getRent() >= 0){
+            cash -= currentProperty.getRent();
+            landlord.cash += currentProperty.getRent();
+        }
+
+        else{
+            Display.inform("You are bankrupt!");
+            bankrupt(landlord);
+        }
     }
 
     public void specialAction(){
 //todo
+    }
+
+    public void bankrupt(Player owed){
+        //todo
     }
 
     public void buyAndSellHouses(){
