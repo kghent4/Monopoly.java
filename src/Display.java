@@ -4,6 +4,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
+//TODO fix property assets display font size
+//TODO fix property assets display backdrop color for utilities
+
 public class Display extends JFrame {
 
     static Property[][] properties = new Property[11][11];
@@ -51,7 +54,6 @@ public class Display extends JFrame {
         public void drawPlayers(Graphics g2d){
             
             g2d.setFont(new Font("SansSerif", Font.PLAIN, (squareLength/6)));
-            System.out.println("Draw Players");
             if(players != null && !players.isEmpty()){
                 int playerOffset = 1;
                 for(Player p:players){

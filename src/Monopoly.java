@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.SwingUtilities;
 
 public class Monopoly {
 
     static ArrayList<Player> players = new ArrayList<Player>(1);
     static boolean gameOver = false;
+    
     public static void main(String[] args) {
 
         Board b = new Board();
@@ -47,6 +49,7 @@ public class Monopoly {
     }
 
     public static void movePlayer(int roll, Player p){
+        System.out.println("in movePlayers");
         int newLoc = p.location + roll;
         if(newLoc > 40){
             Display.inform("You passed go! Collect $200!");
@@ -56,10 +59,8 @@ public class Monopoly {
 
         p.location = newLoc;
         Display.boardPanel.repaint();
-    }
 
-    public static void landOnSquare(){
-        
-            //how to associate location with property object?
+        p.currentProperty = Board.propertiesMap.get(p.location);
+        p.landOnProperty();
     }
 }

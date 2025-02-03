@@ -7,19 +7,51 @@ public class Player {
     String name;
     int cash;
     int location;
+    Property currentProperty;
 
     public Player(String name){
         this.name = name;
         cash = 2000;
         location = 0;
+        currentProperty = Board.propertiesMap.get(0);
     }
 
-    public void move(){
-        //todo
+    public void landOnProperty(){
+        System.out.println("in land on property");
+        switch(currentProperty.type){
+            case "utility":
+            case "railroad":
+            case "property":
+                if(currentProperty.owner == null){
+                    buy();
+                }
+                else{
+                    payRent();
+                }
+                break;
+            default:
+                specialAction();
+        }
+
+        //if a current set is completed
+        buyAndSellHouses();
     }
 
     public void buy(){
-//todo
+        String[] options = {"Yes", "No"};
+        int choice = Display.choice("Available Property", "Do you want to buy " + currentProperty.getName() + " for $" + currentProperty.cost + "?", options);
+        if(choice == 0){
+            if(cash >= currentProperty.cost){
+                propertiesOwned.add(currentProperty);
+                currentProperty.owner = this;
+                cash -= currentProperty.cost;
+                Display.inform("You bought " + currentProperty.getName() + "!");
+                Display.boardPanel.repaint();
+            }
+            else{
+                Display.inform("You don't have enough cash!");
+            }
+        }
     }
 
     public void payRent(){
