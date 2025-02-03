@@ -1,7 +1,10 @@
 
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Property {
+
 
     Color color;
     String name;
@@ -10,7 +13,6 @@ public class Property {
     int houseCost;
     String type;
     int setSize;
-
     int numHouses;
     int cost;
 

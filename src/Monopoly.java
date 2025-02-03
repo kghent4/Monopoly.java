@@ -57,4 +57,9 @@ public class Monopoly {
         p.location = newLoc;
         Display.boardPanel.repaint();
     }
+
+    public static void landOnSquare(){
+        
+            //how to associate location with property object?
+    }
 }
