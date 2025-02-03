@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.text.PlainDocument;
 
 public class Card {
     static ArrayList<Card> communityChest = new ArrayList<>();
@@ -74,30 +73,67 @@ public class Card {
                 break;
             case "money":
                 if(money > 0){
-                    p.cash += money;
+                    p.changeCash(money);
                 }
                 else{
                     p.payMoney(money, null);
                 }
                 break;
             case "jail":
-                p.location = 10;
-                p.currentProperty = Board.propertiesMap.get(10);
+                p.setLocation(10);;
+                p.setCurrentProperty(Board.propertiesMap.get(10));
                 p.goToJail();
                 break;
             case "allMoney":
-                //todo
-            case "repairs":
-                //todo
-            case "outOfJail":
-            //todo
-            case "moveBack":
-            //todo
-            case "railroad":
-            //todo
-            case "utility":
+                if(money < 0){
+                    for(Player other: Monopoly.players){
+                        p.payMoney(money, other);
+                    }
+                }
+                else{
+                    for(Player other: Monopoly.players){
+                        other.payMoney(money, p);
+                    }
+                }
                 break;
+
+            case "repairs":
+                int houseCount = 0;
+                for(Property prop: p.getProperties()){
+                    houseCount += prop.numHouses;
+                }
+                p.payMoney(houseCount * 25, null);
+                break;
+            case "outOfJail":
+                p.setInJail(false);
+                p.setNumTurnsInJail(0);
+                break;
+            case "moveBack":
+                if(p.getLocation() - 3 >= 0){
+                    p.movePlayer(-3);
+                }
+                else{
+                    p.movePlayer(39 - p.getLocation());
+                }
+                break;
+            case "railroad":
+                int numAway = p.getLocation() < 6 ? (5 - p.getLocation()) : p.getLocation() < 15 ? (15-p.getLocation()) : p.getLocation() < 25 ? (25 - p.getLocation()) : p.getLocation() < 35 ? (35 - p.getLocation()) : (39-p.getLocation()) + 6;
+                p.movePlayer(numAway);
+                break;
+            case "utility":
+                int numAway2 = p.getLocation() < 12 ? (12 - p.getLocation()) : p.getLocation() < 28 ? (28 - p.getLocation()) : (40-p.getLocation()) + 12;
+                p.movePlayer(numAway2);
+                break;
+            default:
+                System.out.println("Something went wrong in Card.takeCardAction");
         }
     }
 
+    public static Card drawCommunityCard(){
+        return null;
+    }
+
+    public static Card drawChanceCard(){
+        return null;
+    }
 }

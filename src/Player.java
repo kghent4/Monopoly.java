@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 public class Player {
 
-    ArrayList<Property> propertiesOwned = new ArrayList<>();
-    String name;
-    int cash;
-    int location;
-    Property currentProperty;
+    private ArrayList<Property> propertiesOwned = new ArrayList<>();
+    private String name;
+    private int cash;
+    private int location;
+    private Property currentProperty;
+    private boolean inJail = false;
+    private int numTurnsInJail = 0;
 
     public Player(String name){
         this.name = name;
@@ -53,6 +55,18 @@ public class Player {
 
         //TODO if a current set is completed
         buyAndSellHouses();
+    }
+
+    public void setInJail(boolean b){
+        inJail = b;
+    }
+
+    public int getNumTurnsInJail(){
+        return numTurnsInJail;
+    }
+
+    public void setNumTurnsInJail(int num){
+        numTurnsInJail = num;
     }
 
     public void buy(){
@@ -105,7 +119,8 @@ public class Player {
     }
 
     public void goToJail(){
-        //todo
+        inJail = true;
+        numTurnsInJail = 1;
     }
 
     public void bankrupt(Player owed){
@@ -142,7 +157,23 @@ public class Player {
         return propertiesOwned;
     }
 
+    public Property getCurrentProperty(){
+        return currentProperty;
+    }
+
     public int getLocation(){
         return location;
+    }
+
+    public void setCurrentProperty(Property p){
+        currentProperty = p;
+    }
+
+    public void setLocation(int loc){
+        location = loc;
+    }
+
+    public void changeCash(int c){
+        cash += c;
     }
 }

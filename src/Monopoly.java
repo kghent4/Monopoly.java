@@ -36,6 +36,7 @@ public class Monopoly {
 
             Display.inform("It's " + players.get(turn).getName() + "'s turn. Roll the dice!");
 
+            //restrict turn if in jail TODO
             int roll = rollDice();
             String article = roll == 1 || roll == 2 || roll == 3 || roll == 4 || roll == 5 || roll == 6 || roll == 7 || roll == 9 || roll == 10 || roll == 12 ? "a" : "an";
 
