@@ -10,12 +10,14 @@ public class Player {
     private Property currentProperty;
     private boolean inJail = false;
     private int numTurnsInJail = 0;
+    private int jailFreeCards;
 
     public Player(String name){
         this.name = name;
         cash = 2000;
         location = 0;
         currentProperty = Board.propertiesMap.get(0);
+        jailFreeCards = 0;
     }
 
     public void movePlayer(int roll){
@@ -107,9 +109,19 @@ public class Player {
             case "Jail":
                 break;
             case "Community Chest":
-                //todo
+                Card drawnCard = Card.drawCommunityCard();
+                drawnCard.takeCardAction(this);
+                if(drawnCard.type.equals("outOfJail")){
+                    jailFreeCards++;
+                }
+                break;
             case "Chance":
-                //todo 
+                Card drawnCard2 = Card.drawChanceCard();
+                drawnCard2.takeCardAction(this);
+                if(drawnCard2.type.equals("outOfJail")){
+                    jailFreeCards++;
+                }
+                break;
             case "Go to Jail":
                 //todo
             default:

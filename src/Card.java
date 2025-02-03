@@ -130,10 +130,14 @@ public class Card {
     }
 
     public static Card drawCommunityCard(){
-        return null;
+        Card x = communityChest.remove(0);
+        communityChest.add(x);
+        return x;
     }
 
     public static Card drawChanceCard(){
-        return null;
+        Card x = chance.remove(0);
+        chance.add(x);
+        return x;
     }
 }
