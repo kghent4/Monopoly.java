@@ -16,6 +16,24 @@ public class Player {
         currentProperty = Board.propertiesMap.get(0);
     }
 
+    public void movePlayer(int roll, Player p){
+        System.out.println("in movePlayers");
+        int newLoc = p.location + roll;
+
+        //todo account for back past go
+        if(newLoc > 40){
+            Display.inform("You passed go! Collect $200!");
+            p.cash += 200;
+            newLoc %= 40;
+        }
+
+        p.location = newLoc;
+        Display.boardPanel.repaint();
+
+        p.currentProperty = Board.propertiesMap.get(p.location);
+        p.landOnProperty();
+    }
+
     public void landOnProperty(){
         System.out.println("in land on property");
         switch(currentProperty.type){
@@ -70,7 +88,43 @@ public class Player {
     }
 
     public void specialAction(){
-//todo
+        switch(currentProperty.name){
+            case "Income Tax":
+                Display.inform("You must pay the bank $200.");
+                if(cash >= 200){
+                    cash -= 200;
+                    Display.boardPanel.repaint();
+                }
+                else{
+                    Display.inform("You are bankrupt!");
+                    bankrupt(null);
+                }
+                break;
+            case "Luxury Tax":
+                Display.inform("You must pay the bank $75.");
+                if(cash >= 75){
+                    cash -= 75;
+                    Display.boardPanel.repaint();
+                }
+                else{
+                    Display.inform("You are bankrupt!");
+                    bankrupt(null);
+                }
+                break;
+            case "Go":
+            case "Free Parking":
+            case "Jail":
+                break;
+            case "Community Chest":
+                //todo
+            case "Chance":
+                //todo 
+            case "Go to Jail":
+                //todo
+            default:
+                System.out.println("Something went wrong. Invalid property type.");
+                break;
+        }
     }
 
     public void bankrupt(Player owed){

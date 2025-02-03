@@ -20,6 +20,9 @@ public class Monopoly {
             Display.players.add(p);
         }
 
+        Card.fillAndShuffleChance();
+        Card.fillAndShuffleCommunityChest();
+
         //Graphics!
         SwingUtilities.invokeLater(() -> Display.setupFrame());
 
@@ -38,7 +41,7 @@ public class Monopoly {
 
             Display.inform(players.get(turn).getName() + " rolled " + article + " " + roll + ".");
 
-            movePlayer(roll, players.get(turn));
+            players.get(turn).movePlayer(roll, players.get(turn));
 
             turn = (turn + 1) % players.size();
         }
@@ -46,21 +49,5 @@ public class Monopoly {
 
     public static int rollDice(){
         return (int)(Math.random() * 6 + 1) + (int)(Math.random() * 6 + 1);
-    }
-
-    public static void movePlayer(int roll, Player p){
-        System.out.println("in movePlayers");
-        int newLoc = p.location + roll;
-        if(newLoc > 40){
-            Display.inform("You passed go! Collect $200!");
-            p.cash += 200;
-            newLoc %= 40;
-        }
-
-        p.location = newLoc;
-        Display.boardPanel.repaint();
-
-        p.currentProperty = Board.propertiesMap.get(p.location);
-        p.landOnProperty();
     }
 }
