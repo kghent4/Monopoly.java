@@ -60,6 +60,7 @@ public class Player {
         if(cash - currentProperty.getRent() >= 0){
             cash -= currentProperty.getRent();
             landlord.cash += currentProperty.getRent();
+            Display.boardPanel.repaint();
         }
 
         else{
