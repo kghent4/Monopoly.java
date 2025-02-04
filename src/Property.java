@@ -71,7 +71,7 @@ public class Property {
             case "railroad":
                 if(owner != null){
 
-                    for(Property p: this.owner.propertiesOwned){
+                    for(Property p: this.owner.getProperties()){
                         if(p.color.equals(this.color)){
                             setCount++;
                         }
@@ -85,7 +85,7 @@ public class Property {
             case "utility":
                 if(owner != null){
 
-                    for(Property p: this.owner.propertiesOwned){
+                    for(Property p: this.owner.getProperties()){
                         if(p.name.equals("Water Works") || p.name.equals("Electric Company") ){
                             setCount++;
                         }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Player {
 
     private ArrayList<Property> propertiesOwned = new ArrayList<>();
-    private String name;
+    private final String name;
     private int cash;
     private int location;
     private Property currentProperty;

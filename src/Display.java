@@ -142,7 +142,7 @@ public class Display extends JFrame {
         private void drawPlayerAssets(Graphics2D g2d) {
 
             int playerOffset = 0;
-            int propertyOffset = squareLength / 4;
+            int propertyOffset;
 
             if(players != null && !players.isEmpty()){
                 for(Player player: players){

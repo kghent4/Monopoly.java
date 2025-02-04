@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-import java.util.Map;
 import javax.swing.SwingUtilities;
 
 public class Monopoly {
 
-    static ArrayList<Player> players = new ArrayList<Player>(1);
+    static ArrayList<Player> players = new ArrayList<>(1);
     static boolean gameOver = false;
     
     public static void main(String[] args) {
@@ -31,7 +30,7 @@ public class Monopoly {
 
     //return true if should take a turn like normal, false otherwise
     public static boolean handleInJail(Player currentPlayer){
-        int choice = 0;
+        int choice;
 
         //If use get out of jail free
         if(currentPlayer.getJailFreeCards() > 0){
@@ -87,7 +86,7 @@ public class Monopoly {
     public static void playGame(){
         gameOver = false;
         int turn = 0;
-        int roll = 0;
+        int roll;
         int doublesCount = 0;
         Player currentPlayer = players.get(turn);
 
