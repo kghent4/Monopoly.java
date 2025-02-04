@@ -60,7 +60,7 @@ public class Card {
 
     public void takeCardAction(Player p){
 
-        Display.inform("Chance/Community Chest: " + text);
+        Display.inform("Chance/Community Chest", text);
 
         switch(type) {
             case "move":

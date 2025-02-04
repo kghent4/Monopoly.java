@@ -26,7 +26,7 @@ public class Player {
 
         //todo account for back past go
         if(newLoc >= 40){
-            Display.inform("Yay!", "You passed go! Collect $200!");
+            Display.inform(name, "You passed go! Collect $200!");
             cash += 200;
             newLoc %= 40;
         }
@@ -85,17 +85,17 @@ public class Player {
 
     public void buy(){
         String[] options = {"Yes", "No"};
-        int choice = Display.choice("Available Property", "Do you want to buy " + currentProperty.getName() + " for $" + currentProperty.cost + "?", options);
+        int choice = Display.choice(name, "Do you want to buy " + currentProperty.getName() + " for $" + currentProperty.cost + "?", options);
         if(choice == 0){
             if(cash >= currentProperty.cost){
                 propertiesOwned.add(currentProperty);
                 currentProperty.owner = this;
                 cash -= currentProperty.cost;
-                Display.inform("You bought " + currentProperty.getName() + "!");
+                Display.inform(name, "You bought " + currentProperty.getName() + "!");
                 Display.boardPanel.repaint();
             }
             else{
-                Display.inform("You don't have enough cash!");
+                Display.inform(name, "You don't have enough cash!");
             }
         }
     }
@@ -109,11 +109,11 @@ public class Player {
     public void specialAction(){
         switch(currentProperty.name){
             case "Income Tax":
-                Display.inform("You must pay the bank $200.");
+                Display.inform(name, "You must pay the bank $200.");
                 payMoney(200, null);
                 break;
             case "Luxury Tax":
-                Display.inform("You must pay the bank $75.");
+                Display.inform(name, "You must pay the bank $75.");
                 payMoney(75, null);
                 break;
             case "Go":
@@ -165,7 +165,7 @@ public class Player {
 
     public void payMoney(int amount, Player owedTo){
         if(cash < amount){
-            Display.inform("You are bankrupt!");
+            Display.inform(name, "You are bankrupt!");
             bankrupt(owedTo);
             return;
         }

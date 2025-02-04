@@ -225,7 +225,7 @@ public class Display extends JFrame {
     }
 
     public static void inform(String title, String text){
-        JOptionPane.showMessageDialog(frame, text, title, 0);
+        JOptionPane.showMessageDialog(frame, text, title, 1);
     }
 
     public static int choice(String title, String text, String[] options){

@@ -58,17 +58,17 @@ public class Monopoly {
         int roll = roll1 + roll2;
         if(roll1 == roll2){
             
-            Display.inform("You rolled a " + roll1 + " and a " + roll2 + ". Doubles!");
+            Display.inform("Josie", "You rolled a " + roll1 + " and a " + roll2 + ". Doubles!");
             currentPlayer.setInJail(false);
             currentPlayer.setNumTurnsInJail(0);
             String article = roll == 2 || roll == 3 || roll == 4 || roll == 5 || roll == 6 || roll == 7 || roll == 9 || roll == 10 || roll == 12 ? "a" : "an";
-            Display.inform(currentPlayer.getName() + " rolled " + article + " " + roll + ".");
+            Display.inform(currentPlayer.getName(), "You rolled " + article + " " + roll + ".");
             currentPlayer.movePlayer(roll);
             return false;
         }
 
         else if(currentPlayer.getNumTurnsInJail() > 3){
-            Display.inform("You must pay $50. This is your third roll.");
+            Display.inform("Josie", "You must pay $50. This is your third roll.");
             currentPlayer.payMoney(50, null);
             currentPlayer.setInJail(false);
             currentPlayer.setNumTurnsInJail(0);
@@ -88,40 +88,41 @@ public class Monopoly {
         int turn = 0;
         int roll;
         int doublesCount = 0;
-        Player currentPlayer = players.get(turn);
+        Player currentPlayer;
 
         while(!gameOver){
 
+            currentPlayer = players.get(turn);
             boolean canMove = currentPlayer.getInJail() ? handleInJail(currentPlayer) : true;
 
             while(canMove){
 
                 Display.inform(currentPlayer.getName(), "It's " + currentPlayer.getName() + "'s turn. Roll the dice!");
-                int roll1 = rollDie();
+                int roll1 = rollDie(); 
                 int roll2 = rollDie();
                 roll = roll1 + roll2;
                 String extra = roll1 == roll2? " Doubles!" : "";
                 String article = roll == 2 || roll == 3 || roll == 4 || roll == 5 || roll == 6 || roll == 7 || roll == 9 || roll == 10 || roll == 12 ? "a" : "an";
-                Display.inform("Roll the dice", currentPlayer.getName() + " rolled " + article + " " + roll + "." + extra);
+                Display.inform(currentPlayer.getName(), "You rolled " + article + " " + roll + "." + extra);
 
                 if(roll1 == roll2){
                     doublesCount += 1;
-                }
-                else{
-                    canMove = false;
-                    doublesCount = 0;
-                }
 
-                if(doublesCount == 3){
-                    Display.inform(":(", "3 Doubles in a row. You go to jail.");
-                    currentPlayer.setInJail(true);
-                    currentPlayer.setNumTurnsInJail(1);
-                    canMove = false;
+                    if(doublesCount == 3){
+                        Display.inform(":(", "3 Doubles in a row. You go to jail.");
+                        currentPlayer.setInJail(true);
+                        currentPlayer.setNumTurnsInJail(1);
+                        canMove = false;
+                    }
+                    else{
+                        players.get(turn).movePlayer(roll);
+                    }
                 }
                 else{
                     players.get(turn).movePlayer(roll);
+                    canMove = false;
+                    doublesCount = 0;
                 }
-                
             }
 
             turn = (turn + 1) % players.size();
