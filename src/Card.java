@@ -59,16 +59,21 @@ public class Card {
     }
 
     public void takeCardAction(Player p){
+
+        Display.inform("Chance/Community Chest: " + text);
+
         switch(type) {
             case "move":
-                if(specificSpace > p.location){
-                    p.movePlayer(specificSpace - p.location);
+                if(specificSpace > p.getLocation()){
+                    p.movePlayer(specificSpace - p.getLocation());
                 }
-                else if(specificSpace == p.location){
+                else if(specificSpace == p.getLocation()){
                     p.movePlayer(40);
                 }
                 else{
-                    p.movePlayer(40-(p.location - specificSpace));
+                    System.out.println("trying to move the player from " + p.getLocation() + " by " + (40-(p.getLocation() - specificSpace)) );
+                    //TODO ERROR
+                    p.movePlayer(40-(p.getLocation() - specificSpace));
                 }
                 break;
             case "money":
@@ -105,8 +110,7 @@ public class Card {
                 p.payMoney(houseCount * 25, null);
                 break;
             case "outOfJail":
-                p.setInJail(false);
-                p.setNumTurnsInJail(0);
+                p.setJailFreeCards(1);
                 break;
             case "moveBack":
                 if(p.getLocation() - 3 >= 0){

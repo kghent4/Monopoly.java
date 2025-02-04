@@ -56,7 +56,7 @@ public class Property {
                 }
 
                 if(owner != null){
-                    for(Property p: this.owner.propertiesOwned){
+                    for(Property p: this.owner.getProperties()){
                         if(p.color.equals(this.color)){
                             setCount++;
                         }

@@ -25,8 +25,8 @@ public class Player {
         int newLoc = location + roll;
 
         //todo account for back past go
-        if(newLoc > 40){
-            Display.inform("You passed go! Collect $200!");
+        if(newLoc >= 40){
+            Display.inform("Yay!", "You passed go! Collect $200!");
             cash += 200;
             newLoc %= 40;
         }
@@ -36,6 +36,14 @@ public class Player {
 
         currentProperty = Board.propertiesMap.get(location);
         landOnProperty();
+    }
+
+    public int getJailFreeCards(){
+        return jailFreeCards;
+    }
+
+    public void setJailFreeCards(int n){
+        jailFreeCards += n;
     }
 
     public void landOnProperty(){
@@ -61,6 +69,10 @@ public class Player {
 
     public void setInJail(boolean b){
         inJail = b;
+    }
+
+    public boolean getInJail(){
+        return inJail;
     }
 
     public int getNumTurnsInJail(){
