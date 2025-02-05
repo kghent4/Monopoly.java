@@ -93,6 +93,20 @@ public class Monopoly {
         while(!gameOver){
 
             currentPlayer = players.get(turn);
+
+            //TODO For demo purposes only
+            Display.inform(currentPlayer.getName(), "It's " + currentPlayer.getName() + "'s turn. Roll the dice!");
+            int roll1 = rollDie(); 
+            int roll2 = rollDie();
+            roll = roll1 + roll2;
+            String extra = roll1 == roll2 ? " Doubles!" : "";
+            String article = roll == 2 || roll == 3 || roll == 4 || roll == 5 || roll == 6 || roll == 7 || roll == 9 || roll == 10 || roll == 12 ? "a" : "an";
+            Display.inform(currentPlayer.getName(), "You rolled " + article + " " + roll + "." + extra);
+
+            currentPlayer.movePlayer(roll);
+            //end demo
+
+            /* TODO removed for demo only
             boolean canMove = currentPlayer.getInJail() ? handleInJail(currentPlayer) : true;
 
             while(canMove){
@@ -115,15 +129,15 @@ public class Monopoly {
                         canMove = false;
                     }
                     else{
-                        players.get(turn).movePlayer(roll);
+                        currentPlayer.movePlayer(roll);
                     }
                 }
                 else{
-                    players.get(turn).movePlayer(roll);
+                    currentPlayer.movePlayer(roll);
                     canMove = false;
                     doublesCount = 0;
                 }
-            }
+            }*/
 
             turn = (turn + 1) % players.size();
         }

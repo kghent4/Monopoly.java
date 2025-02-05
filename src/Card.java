@@ -71,8 +71,6 @@ public class Card {
                     p.movePlayer(40);
                 }
                 else{
-                    System.out.println("trying to move the player from " + p.getLocation() + " by " + (40-(p.getLocation() - specificSpace)) );
-                    //TODO ERROR
                     p.movePlayer(40-(p.getLocation() - specificSpace));
                 }
                 break;

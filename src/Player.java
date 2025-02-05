@@ -21,10 +21,8 @@ public class Player {
     }
 
     public void movePlayer(int roll){
-        System.out.println("in movePlayers");
         int newLoc = location + roll;
 
-        //todo account for back past go
         if(newLoc >= 40){
             Display.inform(name, "You passed go! Collect $200!");
             cash += 200;
@@ -35,7 +33,7 @@ public class Player {
         Display.boardPanel.repaint();
 
         currentProperty = Board.propertiesMap.get(location);
-        landOnProperty();
+       // landOnProperty(); TODO demo only out
     }
 
     public int getJailFreeCards(){
@@ -47,7 +45,6 @@ public class Player {
     }
 
     public void landOnProperty(){
-        System.out.println("in land on property");
         switch(currentProperty.type){
             case "utility":
             case "railroad":
